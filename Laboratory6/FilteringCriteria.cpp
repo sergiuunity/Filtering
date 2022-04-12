@@ -113,3 +113,76 @@ DynamicArray FilteringCriteriaTypeAndPrice::filter(DynamicArray& data)
 	return output_array;
 
 }
+
+
+string FilteringCriteriaDeparture::getDeparture() const
+{
+	return this->departure;
+}
+
+void FilteringCriteriaDeparture::setDeparture(string departure)
+{
+	this->departure = departure;
+}
+
+FilteringCriteriaDeparture::FilteringCriteriaDeparture()
+{
+	this->departure = "";
+}
+
+
+FilteringCriteriaDeparture::FilteringCriteriaDeparture(string departure)
+{
+	this->departure = departure;
+}
+
+DynamicArray FilteringCriteriaDeparture::filter(DynamicArray& data)
+{
+	DynamicArray output_array;
+	for (int i = 0; i < data.getLength(); i++)
+	{
+		if (data.get(i).getDeparture() == this->departure)
+		{
+			output_array.append(data.get(i));
+		}
+	}
+	return output_array;
+
+
+}
+
+string FilteringCriteriaDestination::getDestination() const
+{
+	return this->destination;
+}
+
+void FilteringCriteriaDestination::setDestination(string destination)
+{
+	this->destination = destination;
+}
+
+FilteringCriteriaDestination::FilteringCriteriaDestination()
+{
+	this->destination = "";
+}
+
+
+FilteringCriteriaDestination::FilteringCriteriaDestination(string destination)
+{
+	this->destination = destination;
+}
+
+DynamicArray FilteringCriteriaDestination::filter(DynamicArray& data)
+{
+	DynamicArray output_array;
+	for (int i = 0; i < data.getLength(); i++)
+	{
+		if (data.get(i).getDestination() == this->destination)
+		{
+			output_array.append(data.get(i));
+		}
+	}
+	return output_array;
+
+
+}

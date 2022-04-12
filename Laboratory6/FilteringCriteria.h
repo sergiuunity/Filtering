@@ -80,3 +80,64 @@ private:
 	OfferType type;
 	float price;
 };
+
+
+
+class FilteringCriteriaAnd
+{
+public:
+	virtual DynamicArray filter(DynamicArray& data) = 0;
+
+private:
+
+};
+
+
+
+class FilteringCriteriaDeparture : public FilteringCriteriaAnd
+{
+public:
+
+	//getters and setters
+	string getDeparture()const;
+	void setDeparture(string departure);
+
+	//constructors
+	FilteringCriteriaDeparture();
+
+	FilteringCriteriaDeparture(string departure);
+
+	//filter
+	DynamicArray filter(DynamicArray& data);
+
+
+
+private:
+	string departure;
+
+
+};
+
+class FilteringCriteriaDestination : public FilteringCriteriaAnd
+{
+public:
+
+	//getters and setters
+	string getDestination()const;
+	void setDestination(string Destination);
+
+	//constructors
+	FilteringCriteriaDestination();
+
+	FilteringCriteriaDestination(string Destination);
+
+	//filter
+	DynamicArray filter(DynamicArray& data);
+
+
+
+private:
+	string destination;
+
+
+};

@@ -30,22 +30,33 @@ int main() {
 	DynamicArray allOffers;
 
 
-	////EXAMPLES
-	//Offer e1("1", 397, "Cluj-Napoca", "Rome", "10.07.2022", "14.07.2022", 2);
-	//Offer e2("2", 997, "Bucharest", "New York", "05.09.2022", "10.09.2022", 2);
-	//Offer e3("3", 1297, "Bucharest", "Maldives", "13.06.2022", "20.06.2022", 4);
-	//Offer e4("4", 1097, "Bucharest", "Seychelles", "14.07.2022", "21.07.2022", 4);
-	//Offer e5("5", 1150, "Budapest", "Port of Spain", "20.07.2022", "27.07.2022", 3);
-	//Offer e6("6", 850, "Cluj-Napoca", "Alexandria-Cairo-Luxor", "10.06.2022", "15.06.2022", 1);
-	//
-	//allOffers.append(e1);
-	//allOffers.append(e2);
-	//allOffers.append(e3);
-	//allOffers.append(e4);
-	//allOffers.append(e5);
-	//allOffers.append(e6);
+	//EXAMPLES
+	Offer e1("1", 397, "Cluj-Napoca", "Rome", "10.07.2022", "14.07.2022", 2);
+	Offer e2("2", 997, "Bucharest", "New York", "05.09.2022", "10.09.2022", 2);
+	Offer e3("3", 1297, "Bucharest", "Maldives", "13.06.2022", "20.06.2022", 4);
+	Offer e4("4", 1097, "Bucharest", "Seychelles", "14.07.2022", "21.07.2022", 4);
+	Offer e5("5", 1150, "Budapest", "Port of Spain", "20.07.2022", "27.07.2022", 3);
+	Offer e6("6", 850, "Cluj-Napoca", "Alexandria-Cairo-Luxor", "10.06.2022", "15.06.2022", 1);
+	Offer e7("7", 997, "Here", "New York", "05.09.2022", "10.09.2022", 2);
+	
+	allOffers.append(e1);
+	allOffers.append(e2);
+	allOffers.append(e3);
+	allOffers.append(e4);
+	allOffers.append(e5);
+	allOffers.append(e6);
+	allOffers.append(e7);
 
-	string command;
+
+	//FilteringCriteriaAnd* filter = new FilteringCriteriaDeparture("Cluj-Napoca");
+
+	FilteringCriteriaAnd* filter = new FilteringCriteriaDestination("New York");
+
+	
+	cout<< filter->filter(allOffers);
+
+
+	/*string command;
 	displayMenu();
 	cout << "Give command...";
 	cin >> command;
@@ -131,7 +142,7 @@ int main() {
 		cout << "Give command...";
 		cin >> command;
 	}
-	cout << "The application will now close." << endl;
+	cout << "The application will now close." << endl;*/
 
 	return 0;
 }
