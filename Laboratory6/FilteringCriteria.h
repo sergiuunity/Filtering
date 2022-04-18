@@ -2,99 +2,94 @@
 #include "DynamicArray.h"
 #include <iostream>
 
+using std::string;
 
 // you can add all your filtering classes in this module
 class FilteringCriteria
 {
-public:
-	//filter
-	DynamicArray<Offer> filter(DynamicArray<Offer>& data);
 
-private:
-};
-
-
-class FilteringPrice : public FilteringCriteria
-{
-public:
-	//getters and setters
-	float getPrice()const;
-	void setPrice(float price);
-
-	//constructors
-	FilteringPrice();
-
-	FilteringPrice(float price);
-
-	//filter
-	DynamicArray<Offer> filter(DynamicArray<Offer>& data);
-
-
-
-private:
-	float price;
-};
-
-class FilteringType : public FilteringCriteria
-{
-public:
-	//getters and setters
-	OfferType getType()const;
-	void setType(int type);
-
-	//constructors
-	FilteringType();
-
-	FilteringType(int type);
-
-	//filter
-	DynamicArray<Offer> filter(DynamicArray<Offer>& data);
-
-
-
-private:
-	OfferType type;
-};
-
-
-class FilteringCriteriaTypeAndPrice : public FilteringCriteria
-{
-public:
-	//getters and setters
-	OfferType getType()const;
-	float getPrice()const;
-
-	void setType(int type);
-	void setPrice(float price);
-
-	//constructors
-	FilteringCriteriaTypeAndPrice();
-
-	FilteringCriteriaTypeAndPrice(int type, float price);
-
-	//filter
-	DynamicArray<Offer> filter(DynamicArray<Offer>& data);
-
-
-private:
-	OfferType type;
-	float price;
-};
-
-
-
-class FilteringCriteriaAnd
-{
 public:
 	virtual DynamicArray<Offer> filter(DynamicArray<Offer>& data) = 0;
+};
 
-private:
+class FilteringCriteriaAnd :public FilteringCriteria
+{
+public:
+	//constructor
+	FilteringCriteriaAnd(FilteringCriteria* input_filter1, FilteringCriteria* input_filter2);
+
+	//filter
+	DynamicArray<Offer> filter(DynamicArray<Offer>& data);
+	
+protected:
+	FilteringCriteria* f1;
+	FilteringCriteria* f2; 
+
+};
+
+class FilteringCriteriaOr :public FilteringCriteria
+{
+public:
+	//constructor
+	FilteringCriteriaOr(FilteringCriteria* input_filter1, FilteringCriteria* input_filter2);
+
+	//filter
+	DynamicArray<Offer> filter(DynamicArray<Offer>& data);
+
+protected:
+	FilteringCriteria* f1;
+	FilteringCriteria* f2;
 
 };
 
 
 
-class FilteringCriteriaDeparture : public FilteringCriteriaAnd
+
+
+
+class FilteringCriteriaPrice : public FilteringCriteria
+{
+public:
+	//getters and setters
+	float getPrice()const;
+	void setPrice(float price);
+
+	//constructors
+	FilteringCriteriaPrice();
+
+	FilteringCriteriaPrice(float price);
+
+	//filter
+	DynamicArray<Offer> filter(DynamicArray<Offer>& data);
+
+
+
+private:
+	float price;
+};
+
+class FilteringCriteriaType : public FilteringCriteria
+{
+public:
+	//getters and setters
+	OfferType getType()const;
+	void setType(int type);
+
+	//constructors
+	FilteringCriteriaType();
+
+	FilteringCriteriaType(int type);
+
+	//filter
+	DynamicArray<Offer> filter(DynamicArray<Offer>& data);
+
+
+
+private:
+	OfferType type;
+};
+
+class FilteringCriteriaDeparture : public FilteringCriteria
 {
 public:
 
@@ -118,7 +113,7 @@ private:
 
 };
 
-class FilteringCriteriaDestination : public FilteringCriteriaAnd
+class FilteringCriteriaDestination : public FilteringCriteria
 {
 public:
 

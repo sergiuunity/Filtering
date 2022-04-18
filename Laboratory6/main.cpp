@@ -47,13 +47,21 @@ int main() {
 	allOffers.append(e6);
 	allOffers.append(e7);
 
-
-	//FilteringCriteriaAnd* filter = new FilteringCriteriaDeparture("Cluj-Napoca");
-
-	FilteringCriteriaAnd* filter = new FilteringCriteriaDestination("New York");
-
+	FilteringCriteriaDeparture filter1("Bucharest");
+	FilteringCriteriaPrice filter2(1100);
+	FilteringCriteriaAnd end_filter(&filter1, &filter2);
 	
-	cout<< filter->filter(allOffers);
+	cout << "Under 1100 from Bucharest: " << endl;
+	cout<< end_filter.filter(allOffers) << endl;
+
+	FilteringCriteriaDeparture filter3("Cluj-Napoca");
+	FilteringCriteriaOr end_filter2(&filter1, &filter3); 
+	cout << "From Bucharest or Cluj-Napoca: " << endl;
+	cout << end_filter2.filter(allOffers) << endl;
+
+
+
+
 
 	return 0;
 }

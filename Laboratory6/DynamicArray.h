@@ -5,6 +5,7 @@
 //using namespace std;
 
 using std::ostream;
+using std::cout;
 
 //typedef Offer ElementType;
 
@@ -183,7 +184,7 @@ public:
 
 	bool isElemIn(const ElementType v)
 	{
-		for (int i = 0; i < this->length; i++)
+		for (unsigned int i = 0; i < this->length; i++)
 		{
 			if (v == this->get(i))
 				return true;
@@ -194,7 +195,7 @@ public:
 	bool operator==(const DynamicArray<ElementType>& other) const
 	{
 		if (this->getLength() != other.getLength() || this->getCapacity() != other.getCapacity()) return false;
-		for (int i = 0; i < this->getLength(); i++)
+		for (unsigned int i = 0; i < this->getLength(); i++)
 		{
 			if (data[i] != other.data[i])return false;
 		}
@@ -207,7 +208,33 @@ public:
 		return true;
 	}
 
+	DynamicArray intersection_of_two_arrays(DynamicArray<ElementType>& other)
+	{
+		DynamicArray<ElementType> result_array;
+		unsigned int i;
+		for (i = 0; i < this->length; i++)
+		{
+			if (other.isElemIn(this->get(i)))
+			{
+				result_array.append(this->get(i));
+			}
+		}
+		return result_array;
+	}
 
+	DynamicArray union_of_two_arrays(DynamicArray<ElementType>& other)
+	{
+		DynamicArray<ElementType> result_array = (*this);
+		unsigned int i;
+		for (i = 0; i < other.getLength(); i++)
+		{
+			if (!(result_array.isElemIn(other.get(i))))
+			{
+				result_array.append(other.get(i));
+			}
+		}
+		return result_array;
+	}
 
 private:
 	// static -> it belongs to the class

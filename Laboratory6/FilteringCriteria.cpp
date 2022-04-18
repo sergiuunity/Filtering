@@ -1,34 +1,81 @@
 #include "FilteringCriteria.h"
+using std::string;
 
-DynamicArray<Offer> FilteringCriteria::filter(DynamicArray<Offer>& data)
+
+FilteringCriteriaAnd::FilteringCriteriaAnd(FilteringCriteria* input_filter1, FilteringCriteria* input_filter2)
 {
-	return data;
+	f1 = input_filter1;
+	f2 = input_filter2;
 }
 
-float FilteringPrice::getPrice() const
+DynamicArray<Offer> FilteringCriteriaAnd::filter(DynamicArray<Offer>& data)
+{
+	DynamicArray<Offer> first, second, result;
+	first = (*f1).filter(data);
+	second = (*f2).filter(data);
+	
+	//intersection
+
+	result = first.intersection_of_two_arrays(second);
+
+	return result;
+}
+
+
+
+
+FilteringCriteriaOr::FilteringCriteriaOr(FilteringCriteria* input_filter1, FilteringCriteria* input_filter2)
+{
+	f1 = input_filter1;
+	f2 = input_filter2;
+}
+
+DynamicArray<Offer> FilteringCriteriaOr::filter(DynamicArray<Offer>& data)
+{
+	DynamicArray<Offer> first, second, result;
+	first = (*f1).filter(data);
+	second = (*f2).filter(data);
+
+	//intersection
+
+	result = first.union_of_two_arrays(second);
+
+	return result;
+}
+
+
+
+
+
+
+
+
+
+
+float FilteringCriteriaPrice::getPrice() const
 {
 	return this->price;
 }
 
-void FilteringPrice::setPrice(float price)
+void FilteringCriteriaPrice::setPrice(float price)
 {
 	this->price = price;
 }
 
-FilteringPrice::FilteringPrice()
+FilteringCriteriaPrice::FilteringCriteriaPrice()
 {
 	this->price = 0;
 }
 
-FilteringPrice::FilteringPrice(float price)
+FilteringCriteriaPrice::FilteringCriteriaPrice(float price)
 {
 	this->price = price;
 }
 
-DynamicArray<Offer> FilteringPrice::filter(DynamicArray<Offer>& data)
+DynamicArray<Offer> FilteringCriteriaPrice::filter(DynamicArray<Offer>& data)
 {
 	DynamicArray<Offer> output_array;
-	for (int i = 0; i < data.getLength(); i++)
+	for (unsigned int i = 0; i < data.getLength(); i++)
 	{
 		if (data.get(i).getPrice() < this->price)
 		{
@@ -38,30 +85,30 @@ DynamicArray<Offer> FilteringPrice::filter(DynamicArray<Offer>& data)
 	return output_array;
 }
 
-OfferType FilteringType::getType() const
+OfferType FilteringCriteriaType::getType() const
 {
 	return this->type;
 }
 
-void FilteringType::setType(int type)
+void FilteringCriteriaType::setType(int type)
 {
 	this->type = (OfferType)(type);
 }
 
-FilteringType::FilteringType()
+FilteringCriteriaType::FilteringCriteriaType()
 {
 	this->type = (OfferType)(0);
 }
 
-FilteringType::FilteringType(int type)
+FilteringCriteriaType::FilteringCriteriaType(int type)
 {
 	this->type = (OfferType)(type);
 }
 
-DynamicArray<Offer> FilteringType::filter(DynamicArray<Offer>& data)
+DynamicArray<Offer> FilteringCriteriaType::filter(DynamicArray<Offer>& data)
 {
 	DynamicArray<Offer> output_array;
-	for (int i = 0; i < data.getLength(); i++)
+	for (unsigned int i = 0; i < data.getLength(); i++)
 	{
 		if (data.get(i).getType() == this->type)
 		{
@@ -69,49 +116,6 @@ DynamicArray<Offer> FilteringType::filter(DynamicArray<Offer>& data)
 		}
 	}
 	return output_array;
-}
-
-OfferType FilteringCriteriaTypeAndPrice::getType() const
-{
-	return this->type;
-}
-
-float FilteringCriteriaTypeAndPrice::getPrice() const
-{
-	return this->price;
-}
-
-void FilteringCriteriaTypeAndPrice::setType(int type)
-{
-	this->type = (OfferType)(type);
-}
-
-void FilteringCriteriaTypeAndPrice::setPrice(float price)
-{
-	this->price = price;
-}
-
-FilteringCriteriaTypeAndPrice::FilteringCriteriaTypeAndPrice()
-{
-	this->type = (OfferType)(0);
-	this->price = 0;
-}
-
-FilteringCriteriaTypeAndPrice::FilteringCriteriaTypeAndPrice(int type, float price)
-{
-	this->type = (OfferType)(type);
-	this->price = price;
-}
-
-DynamicArray<Offer> FilteringCriteriaTypeAndPrice::filter(DynamicArray<Offer>& data)
-{
-	DynamicArray<Offer> output_array;
-	FilteringType first_filter(int(this->type));
-	FilteringPrice second_filter(this->price);
-	output_array = first_filter.filter(data);
-	output_array = second_filter.filter(output_array);
-	return output_array;
-
 }
 
 
@@ -139,7 +143,7 @@ FilteringCriteriaDeparture::FilteringCriteriaDeparture(string departure)
 DynamicArray<Offer> FilteringCriteriaDeparture::filter(DynamicArray<Offer>& data)
 {
 	DynamicArray<Offer> output_array;
-	for (int i = 0; i < data.getLength(); i++)
+	for (unsigned int i = 0; i < data.getLength(); i++)
 	{
 		if (data.get(i).getDeparture() == this->departure)
 		{
@@ -175,7 +179,7 @@ FilteringCriteriaDestination::FilteringCriteriaDestination(string destination)
 DynamicArray<Offer> FilteringCriteriaDestination::filter(DynamicArray<Offer>& data)
 {
 	DynamicArray<Offer> output_array;
-	for (int i = 0; i < data.getLength(); i++)
+	for (unsigned int i = 0; i < data.getLength(); i++)
 	{
 		if (data.get(i).getDestination() == this->destination)
 		{
