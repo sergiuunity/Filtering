@@ -13,7 +13,8 @@ public:
 	static void test_filterType();
 	static void test_filterDeparture();
 	static void test_filterDestination();
-
+	static void test_filteringCriteriaAnd();
+	static void test_filteringCriteriaOr();
 
 };
 

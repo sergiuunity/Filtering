@@ -59,9 +59,5 @@ int main() {
 	cout << "From Bucharest or Cluj-Napoca: " << endl;
 	cout << end_filter2.filter(allOffers) << endl;
 
-
-
-
-
 	return 0;
 }

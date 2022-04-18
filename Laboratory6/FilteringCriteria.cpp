@@ -47,11 +47,6 @@ DynamicArray<Offer> FilteringCriteriaOr::filter(DynamicArray<Offer>& data)
 
 
 
-
-
-
-
-
 float FilteringCriteriaPrice::getPrice() const
 {
 	return this->price;
