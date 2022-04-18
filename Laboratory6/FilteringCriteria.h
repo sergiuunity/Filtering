@@ -8,7 +8,7 @@ class FilteringCriteria
 {
 public:
 	//filter
-	DynamicArray filter(DynamicArray& data);
+	DynamicArray<Offer> filter(DynamicArray<Offer>& data);
 
 private:
 };
@@ -27,7 +27,7 @@ public:
 	FilteringPrice(float price);
 
 	//filter
-	DynamicArray filter(DynamicArray& data);
+	DynamicArray<Offer> filter(DynamicArray<Offer>& data);
 
 
 
@@ -48,7 +48,7 @@ public:
 	FilteringType(int type);
 
 	//filter
-	DynamicArray filter(DynamicArray& data);
+	DynamicArray<Offer> filter(DynamicArray<Offer>& data);
 
 
 
@@ -73,7 +73,7 @@ public:
 	FilteringCriteriaTypeAndPrice(int type, float price);
 
 	//filter
-	DynamicArray filter(DynamicArray& data);
+	DynamicArray<Offer> filter(DynamicArray<Offer>& data);
 
 
 private:
@@ -86,7 +86,7 @@ private:
 class FilteringCriteriaAnd
 {
 public:
-	virtual DynamicArray filter(DynamicArray& data) = 0;
+	virtual DynamicArray<Offer> filter(DynamicArray<Offer>& data) = 0;
 
 private:
 
@@ -108,7 +108,7 @@ public:
 	FilteringCriteriaDeparture(string departure);
 
 	//filter
-	DynamicArray filter(DynamicArray& data);
+	DynamicArray<Offer> filter(DynamicArray<Offer>& data);
 
 
 
@@ -132,7 +132,7 @@ public:
 	FilteringCriteriaDestination(string Destination);
 
 	//filter
-	DynamicArray filter(DynamicArray& data);
+	DynamicArray<Offer> filter(DynamicArray<Offer>& data);
 
 
 

@@ -22,32 +22,32 @@ void DynamicArrayTest::runAllTests()
 
 void DynamicArrayTest::test_getLenght()
 {
-	DynamicArray DA;
+	DynamicArray<Offer> DA;
 	assert(DA.getLength() == 0);
 	for (int i = 0; i < 10; i++)
-		DA.append(Offer(to_string(i), 0, "", "", "", "", 0));
+		DA.append(Offer(std::to_string(i), 0, "", "", "", "", 0));
 	assert(DA.getLength() == 10);
 
 }
 
 void DynamicArrayTest::test_getCapacity()
 {
-	DynamicArray DA;
+	DynamicArray<Offer> DA;
 	assert(DA.getCapacity() == 100);
-	DynamicArray DA2(5);
+	DynamicArray<Offer> DA2(5);
 	assert(DA2.getCapacity() == 5);
 	for (int i = 0; i < 6; i++)
-		DA2.append(Offer(to_string(i), 0, "", "", "", "", 0));
+		DA2.append(Offer(std::to_string(i), 0, "", "", "", "", 0));
 	assert(DA2.getCapacity() == 10);
 }
 
 void DynamicArrayTest::test_append()
 {
-	DynamicArray DA;
+	DynamicArray<Offer> DA;
 	for (int i = 0; i < 5; i++)
-		DA.append(Offer(to_string(i), 0, "", "", "", "", 0));
+		DA.append(Offer(std::to_string(i), 0, "", "", "", "", 0));
 	for (int i = 0; i < 5; i++)
-		assert(DA.get(i).getId() == to_string(i));
+		assert(DA.get(i).getId() == std::to_string(i));
 	assert(DA.getLength() == 5);
 	Offer o("10", 0, "", "", "", "", 0);
 	DA.append(o);
@@ -58,7 +58,7 @@ void DynamicArrayTest::test_append()
 		DA.append(o);
 		assert(false);
 	}
-	catch (int x)
+	catch (int)
 	{
 		assert(true);
 	}
@@ -67,13 +67,13 @@ void DynamicArrayTest::test_append()
 
 void DynamicArrayTest::test_popBack()
 {
-	DynamicArray DA;
+	DynamicArray<Offer> DA;
 	try
 	{
 		DA.popBack();
 		assert(false);
 	}
-	catch (int x)
+	catch (int)
 	{
 		assert(true);
 	}
@@ -86,9 +86,9 @@ void DynamicArrayTest::test_popBack()
 
 void DynamicArrayTest::test_remove()
 {
-	DynamicArray DA;
+	DynamicArray<Offer> DA;
 	for (int i = 0; i < 5; i++)
-		DA.append(Offer(to_string(i), 0, "", "", "", "", 0));
+		DA.append(Offer(std::to_string(i), 0, "", "", "", "", 0));
 	DA.remove(0);
 	assert(DA.get(0) != Offer("0", 0, "", "", "", "", 0));
 	assert(DA.getLength() == 4);
@@ -99,7 +99,7 @@ void DynamicArrayTest::test_remove()
 		DA.remove(10);
 		assert(false);
 	}
-	catch (int x)
+	catch (int)
 	{
 		assert(true);
 	}
@@ -108,7 +108,7 @@ void DynamicArrayTest::test_remove()
 		DA.remove(-1);
 		assert(false);
 	}
-	catch (int x)
+	catch (int)
 	{
 		assert(true);
 	}
@@ -117,17 +117,17 @@ void DynamicArrayTest::test_remove()
 
 void DynamicArrayTest::test_get()
 {
-	DynamicArray DA;
+	DynamicArray<Offer> DA;
 	for (int i = 0; i < 5; i++)
-		DA.append(Offer(to_string(i), 0, "", "", "", "", 0));
+		DA.append(Offer(std::to_string(i), 0, "", "", "", "", 0));
 	for (int i = 0; i < 5; i++)
-		assert(DA.get(i) == Offer(to_string(i), 0, "", "", "", "", 0));
+		assert(DA.get(i) == Offer(std::to_string(i), 0, "", "", "", "", 0));
 	try
 	{
 		DA.get(10);
 		assert(false);
 	}
-	catch (int x)
+	catch (int)
 	{
 		assert (true);
 	}
@@ -135,14 +135,14 @@ void DynamicArrayTest::test_get()
 
 void DynamicArrayTest::test_insertionOperator()
 {
-	DynamicArray DA;
-	ostringstream out, out2;
+	DynamicArray<Offer> DA;
+	std::ostringstream out, out2;
 	out << DA;
 	string to_test = out.str();
 	assert(to_test == "[]");
 
 	for (int i = 0; i < 5; i++)
-		DA.append(Offer(to_string(i), 0, "", "", "", "", 0));
+		DA.append(Offer(std::to_string(i), 0, "", "", "", "", 0));
 
 	out2 << DA;
 	to_test = out2.str();
@@ -151,7 +151,7 @@ void DynamicArrayTest::test_insertionOperator()
 
 void DynamicArrayTest::test_isElemIn()
 {
-	DynamicArray DA;
+	DynamicArray<Offer> DA;
 	assert(DA.isElemIn(Offer("0", 0, "", "", "", "", 0)) == false);
 	DA.append(Offer("0", 0, "", "", "", "", 0));
 	assert(DA.isElemIn(Offer("0", 0, "", "", "", "", 0)) == true);
@@ -161,7 +161,7 @@ void DynamicArrayTest::test_isElemIn()
 
 void DynamicArrayTest::test_resize()
 {
-	DynamicArray DA(1);
+	DynamicArray<Offer> DA(1);
 	assert(DA.getCapacity() == 1);
 	DA.append(Offer("0", 0, "", "", "", "", 0));
 	assert(DA.getCapacity() == 1);
@@ -172,13 +172,13 @@ void DynamicArrayTest::test_resize()
 
 void DynamicArrayTest::test_constructors()
 {
-	DynamicArray DA;
-	DynamicArray DA_copy(DA);
+	DynamicArray<Offer> DA;
+	DynamicArray<Offer> DA_copy(DA);
 	assert(DA_copy.getLength() == 0);
 	assert(DA_copy.getCapacity() == 100);
 	for (int i = 0; i < 5; i++)
-		DA.append(Offer(to_string(i), 0, "", "", "", "", 0));
-	DynamicArray DA_copy2(DA);
+		DA.append(Offer(std::to_string(i), 0, "", "", "", "", 0));
+	DynamicArray<Offer> DA_copy2(DA);
 	assert(DA_copy2.getLength() == 5);
 	assert(DA_copy2.getCapacity() == 100);
 	for (int i = 0; i < 5; i++)
@@ -191,13 +191,13 @@ void DynamicArrayTest::test_constructors()
 
 void DynamicArrayTest::test_copyConstructor()
 {
-	DynamicArray DA;
-	DynamicArray DA_copy;
+	DynamicArray<Offer> DA;
+	DynamicArray<Offer> DA_copy;
 	DA_copy = DA;
 	assert(DA_copy.getLength() == 0);
 	assert(DA_copy.getCapacity() == 100);
 	for (int i = 0; i < 5; i++)
-		DA.append(Offer(to_string(i), 0, "", "", "", "", 0));
+		DA.append(Offer(std::to_string(i), 0, "", "", "", "", 0));
 	DA_copy = DA;
 	assert(DA_copy.getLength() == 5);
 	assert(DA_copy.getCapacity() == 100);
@@ -210,40 +210,41 @@ void DynamicArrayTest::test_copyConstructor()
 
 void DynamicArrayTest::test_equality()
 {
-	DynamicArray DA, DA2;
+	DynamicArray<Offer> DA;
+	DynamicArray<Offer>	DA2;
 	assert(DA == DA2);
-	DA2 = DynamicArray(3);
+	DA2 = DynamicArray<Offer>(3);
 	assert(!(DA == DA2));
-	DA2 = DynamicArray();
+	DA2 = DynamicArray<Offer>();
 	for (int i = 0; i < 5; i++)
 	{
-		DA.append(Offer(to_string(i), 0, "", "", "", "", 0));
-		DA2.append(Offer(to_string(i), 0, "", "", "", "", 0));
+		DA.append(Offer(std::to_string(i), 0, "", "", "", "", 0));
+		DA2.append(Offer(std::to_string(i), 0, "", "", "", "", 0));
 	}
 	assert(DA == DA2);
 	DA2.popBack();
 	DA2.append(Offer());
 	assert(!(DA == DA2));
-	DA2.append(Offer(to_string(7), 0, "", "", "", "", 0));
+	DA2.append(Offer(std::to_string(7), 0, "", "", "", "", 0));
 	assert(!(DA == DA2));
 }
 
 void DynamicArrayTest::test_inequality()
 {
-	DynamicArray DA, DA2;
+	DynamicArray<Offer> DA, DA2;
 	assert(!(DA != DA2));
-	DA2 = DynamicArray(3);
+	DA2 = DynamicArray<Offer>(3);
 	assert((DA != DA2));
-	DA2 = DynamicArray();
+	DA2 = DynamicArray<Offer>();
 	for (int i = 0; i < 5; i++)
 	{
-		DA.append(Offer(to_string(i), 0, "", "", "", "", 0));
-		DA2.append(Offer(to_string(i), 0, "", "", "", "", 0));
+		DA.append(Offer(std::to_string(i), 0, "", "", "", "", 0));
+		DA2.append(Offer(std::to_string(i), 0, "", "", "", "", 0));
 	}
 	assert(!(DA != DA2));
 	DA2.popBack();
 	DA2.append(Offer());
 	assert((DA != DA2));
-	DA2.append(Offer(to_string(7), 0, "", "", "", "", 0));
+	DA2.append(Offer(std::to_string(7), 0, "", "", "", "", 0));
 	assert((DA != DA2));
 }

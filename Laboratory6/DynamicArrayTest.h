@@ -21,11 +21,5 @@ public:
 	static void test_equality();
 	static void test_inequality();
 
-
-
-
-
-
-
 };
 

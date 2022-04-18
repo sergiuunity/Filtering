@@ -62,7 +62,7 @@ void FilteringTest::test_setType()
 
 void FilteringTest::test_filter()
 {
-	DynamicArray DA;
+	DynamicArray<Offer> DA;
 	FilteringCriteria my_filter;
 	assert(my_filter.filter(DA) == DA);
 	DA.append(Offer("6", 850, "Cluj - Napoca", "Alexandria - Cairo - Luxor", "10.06.2022", "15.06.2022", 1));
@@ -71,11 +71,11 @@ void FilteringTest::test_filter()
 
 void FilteringTest::test_filterPrice()
 {	
-	DynamicArray allOffers;
-	DynamicArray o;
+	DynamicArray<Offer> allOffers;
+	DynamicArray<Offer> o;
 	FilteringPrice my_filter(100);
 	FilteringPrice my_filter2(1000);
-	assert(my_filter.filter(o) == DynamicArray());
+	assert(my_filter.filter(o) == DynamicArray<Offer>());
 
 	Offer e1("1", 397, "Cluj-Napoca", "Rome", "10.07.2022", "14.07.2022", 2);
 	Offer e2("2", 997, "Bucharest", "New York", "05.09.2022", "10.09.2022", 2);
@@ -91,7 +91,7 @@ void FilteringTest::test_filterPrice()
 	allOffers.append(e5);
 	allOffers.append(e6);
 
-	DynamicArray wantedResult;
+	DynamicArray<Offer> wantedResult;
 	wantedResult.append(e1);
 	wantedResult.append(e2);
 	wantedResult.append(e6);
@@ -101,12 +101,12 @@ void FilteringTest::test_filterPrice()
 
 void FilteringTest::test_filterType()
 {
-	DynamicArray allOffers;
-	DynamicArray o;
+	DynamicArray<Offer> allOffers;
+	DynamicArray<Offer> o;
 	FilteringType my_filter(4);
 	FilteringType my_filter2(2);
 	FilteringType my_filter3;
-	assert(my_filter.filter(o) == DynamicArray());
+	assert(my_filter.filter(o) == DynamicArray<Offer>());
 
 	Offer e1("1", 397, "Cluj-Napoca", "Rome", "10.07.2022", "14.07.2022", 2);
 	Offer e2("2", 997, "Bucharest", "New York", "05.09.2022", "10.09.2022", 2);
@@ -122,24 +122,24 @@ void FilteringTest::test_filterType()
 	allOffers.append(e5);
 	allOffers.append(e6);
 
-	DynamicArray wantedResult;
+	DynamicArray<Offer> wantedResult;
 	wantedResult.append(e1);
 	wantedResult.append(e2);
 
 	assert(my_filter2.filter(allOffers) == wantedResult);
-	assert(my_filter3.filter(allOffers) == DynamicArray());
+	assert(my_filter3.filter(allOffers) == DynamicArray<Offer>());
 }
 
 void FilteringTest::test_filterTypeAndPrice()
 {
-	DynamicArray allOffers;
-	DynamicArray o;
+	DynamicArray<Offer> allOffers;
+	DynamicArray<Offer> o;
 	FilteringCriteriaTypeAndPrice my_filter;
 	FilteringCriteriaTypeAndPrice my_filter2(2, 500);
 	FilteringCriteriaTypeAndPrice my_filter3(100, 4);
 	FilteringCriteriaTypeAndPrice my_filter4(2000, 0);
 	FilteringCriteriaTypeAndPrice my_filter5(2, 397);
-	assert(my_filter.filter(o) == DynamicArray());
+	assert(my_filter.filter(o) == DynamicArray<Offer>());
 
 	Offer e1("1", 397, "Cluj-Napoca", "Rome", "10.07.2022", "14.07.2022", 2);
 	Offer e2("2", 997, "Bucharest", "New York", "05.09.2022", "10.09.2022", 2);
@@ -155,11 +155,11 @@ void FilteringTest::test_filterTypeAndPrice()
 	allOffers.append(e5);
 	allOffers.append(e6);
 
-	DynamicArray wantedResult;
+	DynamicArray<Offer> wantedResult;
 	wantedResult.append(e1);
 
 	assert(my_filter2.filter(allOffers) == wantedResult);
-	assert(my_filter3.filter(allOffers) == DynamicArray());
-	assert(my_filter4.filter(allOffers) == DynamicArray());
-	assert(my_filter5.filter(allOffers) == DynamicArray());
+	assert(my_filter3.filter(allOffers) == DynamicArray<Offer>());
+	assert(my_filter4.filter(allOffers) == DynamicArray<Offer>());
+	assert(my_filter5.filter(allOffers) == DynamicArray<Offer>());
 }

@@ -1,6 +1,6 @@
 #include "FilteringCriteria.h"
 
-DynamicArray FilteringCriteria::filter(DynamicArray& data)
+DynamicArray<Offer> FilteringCriteria::filter(DynamicArray<Offer>& data)
 {
 	return data;
 }
@@ -25,9 +25,9 @@ FilteringPrice::FilteringPrice(float price)
 	this->price = price;
 }
 
-DynamicArray FilteringPrice::filter(DynamicArray& data)
+DynamicArray<Offer> FilteringPrice::filter(DynamicArray<Offer>& data)
 {
-	DynamicArray output_array;
+	DynamicArray<Offer> output_array;
 	for (int i = 0; i < data.getLength(); i++)
 	{
 		if (data.get(i).getPrice() < this->price)
@@ -58,9 +58,9 @@ FilteringType::FilteringType(int type)
 	this->type = (OfferType)(type);
 }
 
-DynamicArray FilteringType::filter(DynamicArray& data)
+DynamicArray<Offer> FilteringType::filter(DynamicArray<Offer>& data)
 {
-	DynamicArray output_array;
+	DynamicArray<Offer> output_array;
 	for (int i = 0; i < data.getLength(); i++)
 	{
 		if (data.get(i).getType() == this->type)
@@ -103,9 +103,9 @@ FilteringCriteriaTypeAndPrice::FilteringCriteriaTypeAndPrice(int type, float pri
 	this->price = price;
 }
 
-DynamicArray FilteringCriteriaTypeAndPrice::filter(DynamicArray& data)
+DynamicArray<Offer> FilteringCriteriaTypeAndPrice::filter(DynamicArray<Offer>& data)
 {
-	DynamicArray output_array;
+	DynamicArray<Offer> output_array;
 	FilteringType first_filter(int(this->type));
 	FilteringPrice second_filter(this->price);
 	output_array = first_filter.filter(data);
@@ -136,9 +136,9 @@ FilteringCriteriaDeparture::FilteringCriteriaDeparture(string departure)
 	this->departure = departure;
 }
 
-DynamicArray FilteringCriteriaDeparture::filter(DynamicArray& data)
+DynamicArray<Offer> FilteringCriteriaDeparture::filter(DynamicArray<Offer>& data)
 {
-	DynamicArray output_array;
+	DynamicArray<Offer> output_array;
 	for (int i = 0; i < data.getLength(); i++)
 	{
 		if (data.get(i).getDeparture() == this->departure)
@@ -172,9 +172,9 @@ FilteringCriteriaDestination::FilteringCriteriaDestination(string destination)
 	this->destination = destination;
 }
 
-DynamicArray FilteringCriteriaDestination::filter(DynamicArray& data)
+DynamicArray<Offer> FilteringCriteriaDestination::filter(DynamicArray<Offer>& data)
 {
-	DynamicArray output_array;
+	DynamicArray<Offer> output_array;
 	for (int i = 0; i < data.getLength(); i++)
 	{
 		if (data.get(i).getDestination() == this->destination)

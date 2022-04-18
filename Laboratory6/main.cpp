@@ -27,7 +27,7 @@ int main() {
 	FilteringTest::runAllTests();
 	DynamicArrayTest::runAllTests();
 
-	DynamicArray allOffers;
+	DynamicArray<Offer> allOffers;
 
 
 	//EXAMPLES
@@ -54,95 +54,6 @@ int main() {
 
 	
 	cout<< filter->filter(allOffers);
-
-
-	/*string command;
-	displayMenu();
-	cout << "Give command...";
-	cin >> command;
-	while (command != "Q" && command != "q")
-	{
-		if (command == "M" || command == "m")
-		{
-			displayMenu();
-		}
-		else if (command == "I" || command == "i")
-		{
-			cout << "0 = NO_TYPE" << endl;
-			cout << "1 = CIRCUIT" << endl;
-			cout << "2 = CITY_BREAK" << endl;
-			cout << "3 = CRUISE" << endl;
-			cout << "4 = ALL_INCLUSIVE" << endl << endl;
-		}
-		else if (command == "A" || command == "a")
-		{
-			try
-			{
-				string given_id, given_departure, given_destination, given_start_date, given_end_date;
-				float given_price;
-				int given_type;
-				cout << "ID: ";
-				cin >> given_id;
-				cout << "Departure: ";
-				cin >> given_departure;
-				cout << "Destination: ";
-				cin >> given_destination;
-				cout << "Start Date: ";
-				cin >> given_start_date;
-				cout << "End Date: ";
-				cin >> given_end_date;
-				cout << "Price($): ";
-				cin >> given_price;
-				cout << "Type: ";
-				cin >> given_type;
-				Offer temp_offer(given_id, given_price, given_departure, given_destination, given_start_date, given_end_date, given_type);
-				allOffers.append(temp_offer);
-			}
-			catch (int x)
-			{
-				cout << "Element with such ID already exists in the array." << endl;
-			}
-		}
-		else if (command == "S" || command == "s")
-		{
-			cout << allOffers << endl;
-		}
-		else if (command == "P" || command == "p")
-		{
-			float given_price;
-			cout << "Prices under($): ";
-			cin >> given_price;
-			FilteringPrice my_filter(given_price);
-			cout << my_filter.filter(allOffers) << endl;
-		}
-		else if (command == "T" || command == "t")
-		{
-			int given_type;
-			cout << "Searched type: ";
-			cin >> given_type;
-			FilteringType my_filter(given_type);
-			cout << my_filter.filter(allOffers) << endl;
-
-		}
-		else if (command == "B" || command == "b")
-		{
-			float given_price;
-			int given_type;
-			cout << "Searched type: ";
-			cin >> given_type;
-			cout << "Prices under($): ";
-			cin >> given_price;
-			FilteringCriteriaTypeAndPrice my_filter(given_type, given_price);
-			cout << my_filter.filter(allOffers) << endl;
-		}
-		else
-		{
-			cout << "Unknown command. Try a new one." << endl;
-		}
-		cout << "Give command...";
-		cin >> command;
-	}
-	cout << "The application will now close." << endl;*/
 
 	return 0;
 }
