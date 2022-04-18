@@ -18,6 +18,7 @@ void DynamicArrayTest::runAllTests()
 	test_copyConstructor();
 	test_equality();
 	test_inequality();
+	test_set_operations();
 }
 
 void DynamicArrayTest::test_getLenght()
@@ -247,4 +248,41 @@ void DynamicArrayTest::test_inequality()
 	assert((DA != DA2));
 	DA2.append(Offer(std::to_string(7), 0, "", "", "", "", 0));
 	assert((DA != DA2));
+}
+
+void DynamicArrayTest::test_set_operations()
+{
+	DynamicArray<Offer> DA1;
+	DynamicArray<Offer> DA2;
+	DynamicArray<Offer> wanted;
+	assert(DA1.intersection_of_two_arrays(DA2) == DA1);
+	assert(DA1.union_of_two_arrays(DA2) == DA1);
+	Offer e1("1", 999, "", "", "", "", 0);
+	Offer e2("2", 999, "", "", "", "", 0);
+	Offer e3("3", 999, "", "", "", "", 0);
+	Offer e4("4", 999, "", "", "", "", 0);
+	DA1.append(e1);
+	DA2.append(e4);
+	assert(DA1.intersection_of_two_arrays(DA2) == wanted);
+	wanted.append(e1);
+	wanted.append(e4);
+	assert(DA1.union_of_two_arrays(DA2) == wanted);
+	DA1.append(e2);
+	DA1.append(e3);
+	DA2.append(e2);
+	DA2.append(e3);
+	wanted = DynamicArray<Offer>();
+	wanted.append(e2);
+	wanted.append(e3);
+	assert(DA1.intersection_of_two_arrays(DA2) == wanted);
+	wanted = DynamicArray<Offer>();
+	wanted.append(e1);
+	wanted.append(e2);
+	wanted.append(e3);
+	wanted.append(e4);
+	assert(DA1.union_of_two_arrays(DA2) == wanted);
+	
+
+
+
 }

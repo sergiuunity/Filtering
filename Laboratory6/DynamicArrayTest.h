@@ -20,6 +20,7 @@ public:
 	static void test_copyConstructor();
 	static void test_equality();
 	static void test_inequality();
+	static void test_set_operations();
 
 };
 

@@ -7,10 +7,10 @@ void FilteringTest::runAllTests()
 	test_getType();
 	test_setPrice();
 	test_setType();
-	//test_filter();
 	test_filterPrice();
 	test_filterType();
-	//test_filterTypeAndPrice();
+	test_filterDeparture();
+	test_filterDestination();
 }
 
 void FilteringTest::test_getPrice()
@@ -19,10 +19,6 @@ void FilteringTest::test_getPrice()
 	assert(my_filter.getPrice() == 3);
 	FilteringCriteriaPrice my_filter2;
 	assert(my_filter2.getPrice() == 0);
-	/*FilteringCriteriaTypeAndPrice my_filter3(0, 3);
-	assert(my_filter3.getPrice() == 3);
-	FilteringCriteriaTypeAndPrice my_filter4;
-	assert(my_filter4.getPrice() == 0);*/
 
 }
 
@@ -32,11 +28,6 @@ void FilteringTest::test_getType()
 	assert(my_filter.getType() == OfferType(3));
 	FilteringCriteriaType my_filter2;
 	assert(my_filter2.getType() == OfferType(0));
-	//FilteringCriteriaTypeAndPrice my_filter3(2, 3);
-	//assert(my_filter3.getType() == OfferType(2));
-	//FilteringCriteriaTypeAndPrice my_filter4;
-	//assert(my_filter4.getType() == OfferType(0));
-
 }
 
 void FilteringTest::test_setPrice()
@@ -44,9 +35,6 @@ void FilteringTest::test_setPrice()
 	FilteringCriteriaPrice my_filter;
 	my_filter.setPrice(77);
 	assert(my_filter.getPrice() == 77);
-	//FilteringCriteriaTypeAndPrice my_filter2;
-	//my_filter2.setPrice(99);
-	//assert(my_filter2.getPrice() == 99);
 }
 
 void FilteringTest::test_setType()
@@ -54,20 +42,9 @@ void FilteringTest::test_setType()
 	FilteringCriteriaType my_filter;
 	my_filter.setType(1);
 	assert(my_filter.getType() == OfferType(1));
-	//FilteringCriteriaTypeAndPrice my_filter2;
-	//my_filter2.setType(3);
-	//assert(my_filter2.getType() == OfferType(3));
 
 }
 
-//void FilteringTest::test_filter()
-//{
-//	DynamicArray<Offer> DA;
-//	FilteringCriteria my_filter;
-//	assert(my_filter.filter(DA) == DA);
-//	DA.append(Offer("6", 850, "Cluj - Napoca", "Alexandria - Cairo - Luxor", "10.06.2022", "15.06.2022", 1));
-//	assert(my_filter.filter(DA) == DA);
-//}
 
 void FilteringTest::test_filterPrice()
 {	
@@ -128,6 +105,68 @@ void FilteringTest::test_filterType()
 
 	assert(my_filter2.filter(allOffers) == wantedResult);
 	assert(my_filter3.filter(allOffers) == DynamicArray<Offer>());
+}
+
+void FilteringTest::test_filterDeparture()
+{
+	FilteringCriteriaDeparture my_filter;
+	assert(my_filter.getDeparture() == "");
+	my_filter = FilteringCriteriaDeparture("Bucharest");
+	assert(my_filter.getDeparture() == "Bucharest");
+	my_filter.setDeparture("Here");
+	assert(my_filter.getDeparture() == "Here");
+
+	Offer e1("1", 397, "Cluj-Napoca", "Rome", "10.07.2022", "14.07.2022", 2);
+	Offer e2("2", 997, "Bucharest", "New York", "05.09.2022", "10.09.2022", 2);
+	Offer e3("3", 1297, "Bucharest", "Maldives", "13.06.2022", "20.06.2022", 4);
+	Offer e4("4", 1097, "Bucharest", "Seychelles", "14.07.2022", "21.07.2022", 4);
+	Offer e5("5", 1150, "Budapest", "Port of Spain", "20.07.2022", "27.07.2022", 3);
+	Offer e6("6", 850, "Cluj-Napoca", "Alexandria-Cairo-Luxor", "10.06.2022", "15.06.2022", 1);
+	
+	DynamicArray<Offer> allOffers;
+	DynamicArray<Offer> WANTED;
+	allOffers.append(e1);
+	allOffers.append(e2);
+	allOffers.append(e3);
+	allOffers.append(e4);
+	allOffers.append(e5);
+	allOffers.append(e6);
+	WANTED.append(e1);
+	WANTED.append(e6);
+	my_filter = FilteringCriteriaDeparture("Cluj-Napoca");
+	assert(my_filter.filter(allOffers) == WANTED);
+
+}
+
+void FilteringTest::test_filterDestination()
+{
+	FilteringCriteriaDestination my_filter;
+	assert(my_filter.getDestination() == "");
+	my_filter = FilteringCriteriaDestination("Bucharest");
+	assert(my_filter.getDestination() == "Bucharest");
+	my_filter.setDestination("Here");
+	assert(my_filter.getDestination() == "Here");
+
+	Offer e1("1", 397, "Cluj-Napoca", "Rome", "10.07.2022", "14.07.2022", 2);
+	Offer e2("2", 997, "Bucharest", "New York", "05.09.2022", "10.09.2022", 2);
+	Offer e3("3", 1297, "Bucharest", "Rome", "13.06.2022", "20.06.2022", 2);
+	Offer e4("4", 1097, "Bucharest", "Seychelles", "14.07.2022", "21.07.2022", 4);
+	Offer e5("5", 1150, "Budapest", "Port of Spain", "20.07.2022", "27.07.2022", 3);
+	Offer e6("6", 850, "Cluj-Napoca", "Alexandria-Cairo-Luxor", "10.06.2022", "15.06.2022", 1);
+
+	DynamicArray<Offer> allOffers;
+	DynamicArray<Offer> WANTED;
+	allOffers.append(e1);
+	allOffers.append(e2);
+	allOffers.append(e3);
+	allOffers.append(e4);
+	allOffers.append(e5);
+	allOffers.append(e6);
+	WANTED.append(e1);
+	WANTED.append(e3);
+	my_filter = FilteringCriteriaDestination("Rome");
+	assert(my_filter.filter(allOffers) == WANTED);
+
 }
 
 //void FilteringTest::test_filterTypeAndPrice()
